@@ -5,22 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KRIKYA Official - 100% Bonus</title>
     <style>
-        /* নিওন গ্লো এনিমেশন */
+        /* এনিমেশনসমূহ */
         @keyframes borderGlow {
             0% { border-color: #f0b90b; box-shadow: 0 0 15px #f0b90b; }
             50% { border-color: #ff0055; box-shadow: 0 0 30px #ff0055; }
             100% { border-color: #f0b90b; box-shadow: 0 0 15px #f0b90b; }
         }
-
-        /* রাইট স্লাইড এনিমেশন (১.৫ সেকেন্ড) */
         @keyframes slideInRight {
             0% { transform: translateX(100%); opacity: 0; }
             10% { transform: translateX(0); opacity: 1; }
             90% { transform: translateX(0); opacity: 1; }
             100% { transform: translateX(-100%); opacity: 0; }
         }
-
-        /* বাটনের জন্য লাইটিং এনিমেশন */
         @keyframes pulseBtn {
             0% { transform: scale(1); box-shadow: 0 0 10px #00c853; }
             50% { transform: scale(1.05); box-shadow: 0 0 30px #b2ff59; }
@@ -32,52 +28,52 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* পেজ লম্বা করার জন্য */
             min-height: 100vh;
-            font-family: 'Arial', sans-serif;
+            padding: 20px 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
             overflow-x: hidden;
+            color: white;
         }
 
         .card {
             background: #1e2329;
-            width: 90%;
-            max-width: 400px;
-            padding: 25px;
-            border-radius: 30px;
+            width: 92%;
+            max-width: 420px;
+            padding: 30px 20px;
+            border-radius: 35px;
             border: 3px solid #f0b90b;
             text-align: center;
             animation: borderGlow 4s infinite;
         }
 
         .logo {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             font-weight: 900;
             color: #f0b90b;
             text-shadow: 0 0 20px #f0b90b;
-            margin: 0;
+            margin-bottom: 5px;
             font-style: italic;
-            line-height: 1;
         }
 
-        /* বোনাস টেক্সট ডিজাইন */
-        .bonus-text {
-            color: #ffffff;
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 15px;
+        .bonus-banner {
             background: linear-gradient(90deg, #ff0055, #f0b90b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: white;
             text-transform: uppercase;
         }
 
-        /* লাইভ উইন বক্স */
+        /* লাইভ উইন বক্স ডিজাইন */
         .live-win-box {
-            background: #000;
+            background: rgba(0, 0, 0, 0.6);
             border: 2px solid #00c853;
-            border-radius: 12px;
-            height: 45px;
-            margin: 10px 0;
+            border-radius: 15px;
+            height: 50px;
+            margin-bottom: 20px;
             overflow: hidden;
             position: relative;
             display: flex;
@@ -85,48 +81,70 @@
             justify-content: center;
         }
 
-        #win-content {
+        #win-text {
             white-space: nowrap;
             font-weight: bold;
-            font-size: 0.95rem;
+            font-size: 1rem;
             position: absolute;
         }
 
-        .user-name { color: #00c853; }
-        .won-info { color: #ffa500; }
-
-        /* পেমেন্ট মেথড লোগো ডিজাইন (SVG) */
-        .payment-methods {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background: #fff;
-            padding: 10px;
+        /* অফিশিয়াল সেকশনসমূহ */
+        .info-section {
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-            margin: 15px 0;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
         }
 
-        .pay-logo { height: 25px; width: auto; }
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
 
+        .info-item span { color: #f0b90b; margin-right: 10px; font-weight: bold; }
+
+        /* পেমেন্ট লোগো সেকশন */
+        .payment-header { font-size: 0.9rem; color: #ccc; margin-bottom: 10px; }
+        .payment-row {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 12px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .payment-row div { font-weight: 900; font-size: 0.85rem; }
+        .bk { color: #D12053; } .ng { color: #F7941D; } .rk { color: #8C3494; }
+
+        /* বাটন সেকশন */
         .btn-group { display: flex; flex-direction: column; gap: 15px; }
-
         .btn {
-            padding: 18px;
+            padding: 20px;
             border-radius: 50px;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             font-weight: 900;
             text-decoration: none;
             text-transform: uppercase;
             display: block;
         }
-
         .btn-green {
             background: linear-gradient(90deg, #00c853, #b2ff59);
             color: #000;
             animation: pulseBtn 2s infinite;
         }
+        .btn-gold {
+            background: linear-gradient(90deg, #f0b90b, #ffcc00);
+            color: #000;
+        }
 
-        .btn-gold { background: #f0b90b; color: #000; }
+        .footer-text {
+            font-size: 0.75rem;
+            color: #777;
+            margin-top: 20px;
+        }
 
         .animate-slide { animation: slideInRight 1.5s linear infinite; }
     </style>
@@ -135,55 +153,60 @@
 
     <div class="card">
         <div class="logo">KRIKYA</div>
-        <div class="bonus-text">Welcome 100% Bonus up to 20,000 BDT</div>
+        <div class="bonus-banner">WELCOME 100% BONUS <br> UP TO 20,000 BDT</div>
         
         <div class="live-win-box">
-            <div id="win-content">
-                <span class="user-name" id="user-name">Sabbir***</span> 
-                <span style="color: white;"> WON </span> 
-                <span class="won-info" id="won-amount">5,450 BDT in Aviator! ✈️</span>
-            </div>
+            <div id="win-text"></div>
         </div>
 
-        <div class="payment-methods">
-            <svg viewBox="0 0 100 40" class="pay-logo"><path fill="#D12053" d="M0 0h100v40H0z"/><text x="10" y="28" fill="white" font-weight="bold" font-size="18">bKash</text></svg>
-            <svg viewBox="0 0 100 40" class="pay-logo"><path fill="#F7941D" d="M0 0h100v40H0z"/><text x="10" y="28" fill="white" font-weight="bold" font-size="18">Nagad</text></svg>
-            <svg viewBox="0 0 100 40" class="pay-logo"><path fill="#8C3494" d="M0 0h100v40H0z"/><text x="10" y="28" fill="white" font-weight="bold" font-size="18">Rocket</text></svg>
-            <svg viewBox="0 0 100 40" class="pay-logo"><path fill="#000" d="M0 0h100v40H0z"/><text x="10" y="28" fill="#FFD200" font-weight="bold" font-size="18">upay</text></svg>
+        <div class="info-section">
+            <div class="info-item"><span>✓</span> ১ মিনিটে দ্রুত ডিপোজিট</div>
+            <div class="info-item"><span>✓</span> ৫ মিনিটে দ্রুত উইথড্রল</div>
+            <div class="info-item"><span>✓</span> ২৪/৭ কাস্টমার সাপোর্ট</div>
+            <div class="info-item"><span>✓</span> ১০০% নিরাপদ ও বিশ্বস্ত</div>
+        </div>
+
+        <div class="payment-header">অফিশিয়াল পেমেন্ট মেথড:</div>
+        <div class="payment-row">
+            <div class="bk">bKash</div>
+            <div class="ng">Nagad</div>
+            <div class="rk">Rocket</div>
+            <div style="color: #000;">Upay</div>
         </div>
 
         <div class="btn-group">
-            <a href="https://www.krikya11.club/?af=AG044301" class="btn btn-green">⚡ SIGN-UP NOW</a>
+            <a href="https://www.krikya11.club/?af=AG044301" class="btn btn-green">⚡ SIGN-UP NOW ⚡</a>
             <a href="https://www.krikya11.club/?af=AG044301" class="btn btn-gold">🎁 CLAIM BONUS</a>
+        </div>
+
+        <div class="footer-text">
+            © 2026 KRIKYA Entertainment Group. <br> All Rights Reserved.
         </div>
     </div>
 
     <script>
         const winners = [
-            { name: "Sabbir***", info: "5,450 BDT in Aviator! ✈️" },
-            { name: "Mintu***", info: "12,800 BDT in Super Ace! 🎰" },
-            { name: "Rashed***", info: "3,200 BDT in Roulette! 🎡" },
-            { name: "Ariful***", info: "7,500 BDT in Crazy Time! 🎡" },
-            { name: "Tanvir***", info: "15,200 BDT in Baccarat! 🃏" },
-            { name: "Sumon***", info: "4,100 BDT in Jili Slots! 🎰" }
+            { n: "Sabbir***", w: "5,450 BDT ✈️" },
+            { n: "Mintu***", w: "12,800 BDT 🎰" },
+            { n: "Rashed***", w: "3,200 BDT 🎡" },
+            { n: "Ariful***", w: "7,500 BDT ✈️" },
+            { n: "Tanvir***", w: "15,200 BDT 🎰" }
         ];
 
         let i = 0;
-        const winContent = document.getElementById('win-content');
-        const userName = document.getElementById('user-name');
-        const wonAmount = document.getElementById('won-amount');
+        const txt = document.getElementById('win-text');
 
-        function startAnimation() {
-            userName.innerText = winners[i].name;
-            wonAmount.innerText = winners[i].info;
-            winContent.classList.remove('animate-slide');
-            void winContent.offsetWidth; 
-            winContent.classList.add('animate-slide');
+        function show() {
+            txt.innerHTML = `<span style="color:#00c853">${winners[i].n}</span> <span style="color:white">WON</span> <span style="color:#ffa500">${winners[i].w}</span>`;
+            txt.classList.remove('animate-slide');
+            void txt.offsetWidth;
+            txt.classList.add('animate-slide');
             i = (i + 1) % winners.length;
         }
 
-        startAnimation();
-        setInterval(startAnimation, 1500); // ১.৫ সেকেন্ড গ্যাপ
+        setInterval(show, 1500); 
+        show();
     </script>
+
 </body>
 </html>
