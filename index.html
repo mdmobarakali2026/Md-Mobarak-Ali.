@@ -1,14 +1,19 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Md Mobarak Ali Profile</title>
+    
+    <title>Md Mobarak Ali | Personal Profile</title>
+    <meta name="description" content="Md Mobarak Ali - Official Profile. Father: Md-Kopil Uddin, Address: Kutinawdanga, Nakhargonj, Nageswari.">
+    <meta name="keywords" content="Md Mobarak Ali, Mobarak Ali Nageswari, Md Mobarak Ali Kurigram, Md Mobarak Ali Website">
+    <meta name="author" content="Md Mobarak Ali">
+
     <style>
         body {
             background-color: #080808;
             color: white;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,27 +26,27 @@ DOCTYPE html>
             padding: 30px;
             background: #111;
             text-align: center;
-            border-radius: 20px;
+            border-radius: 25px;
             border: 4px solid;
             border-image: linear-gradient(45deg, #ff0000, #fffb00, #00ffd5, #7a00ff, #ff0000) 1;
             animation: border-flow 4s linear infinite;
             position: relative;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
         }
 
         .bismillah {
             color: #00d2ff;
-            font-size: 19px;
+            font-size: 20px;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             display: block;
             text-shadow: 0 0 10px #00d2ff;
         }
 
-        /* ছবি এবং লাইটিং ফ্রেম */
+        /* প্রোফাইল পিকচার স্টাইল */
         .profile-img-container {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             margin: 0 auto 15px;
             border-radius: 50%;
             overflow: hidden;
@@ -62,31 +67,34 @@ DOCTYPE html>
         }
 
         .name-style {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 900;
             color: #fff;
             text-transform: uppercase;
-            text-shadow: 0 0 10px #ff00d4;
+            text-shadow: 0 0 15px #ff00d4;
             margin-bottom: 20px;
             display: block;
+            letter-spacing: 1px;
         }
 
         .info-list {
             text-align: left;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .info-item {
-            color: #ccc;
+            color: #e0e0e0;
             font-size: 15px;
             margin: 12px 0;
             display: flex;
             align-items: center;
+            line-height: 1.4;
         }
 
         .icon {
             margin-right: 12px;
-            font-size: 20px;
+            font-size: 22px;
+            filter: drop-shadow(0 0 5px #39ff14);
         }
 
         .label-text {
@@ -95,45 +103,45 @@ DOCTYPE html>
             margin-right: 5px;
         }
 
+        /* বাটন স্টাইল */
         .btn-box {
             display: flex;
             justify-content: space-around;
-            margin-top: 25px;
+            margin-top: 30px;
         }
 
         .btn {
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
             font-size: 14px;
             color: #fff;
-            transition: 0.3s;
+            transition: 0.4s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        .btn-fb { background: #1877F2; }
-        .btn-wa { background: #25D366; }
+        .btn-fb { background: linear-gradient(45deg, #1877F2, #0056b3); }
+        .btn-wa { background: linear-gradient(45deg, #25D366, #128C7E); }
 
+        .btn:hover { transform: scale(1.1); }
+
+        /* সিগনেচার সেকশন */
         .signature-section {
-            margin-top: 25px;
+            margin-top: 30px;
             text-align: right;
-            padding-right: 10px;
+            padding-right: 15px;
         }
 
         .signature {
-            font-family: 'Cursive', sans-serif;
-            font-size: 24px;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 26px;
             color: #00d2ff;
             display: inline-block;
             border-top: 1px solid #444;
             padding-top: 5px;
             font-style: italic;
-            animation: sign-glow 3s infinite alternate;
-        }
-
-        @keyframes sign-glow {
-            from { text-shadow: 0 0 5px #00d2ff; }
-            to { text-shadow: 0 0 15px #00d2ff, 0 0 20px #fff; }
+            text-shadow: 0 0 10px #00d2ff;
         }
 
         @keyframes border-flow {
@@ -148,10 +156,10 @@ DOCTYPE html>
         <span class="bismillah">বিসমিল্লাহির রহমানির রহিম</span>
 
         <div class="profile-img-container">
-            <img src="https://i.postimg.cc/YqtYnGqx/FB-IMG-1760171631409.jpg" alt="Md Mobarak Ali">
+            <img src="https://i.postimg.cc/Wz53f4Xx/1756875268300.jpg" alt="Md Mobarak Ali">
         </div>
 
-        <span class="name-style">Md Mobarak Ali</span>
+        <h1 class="name-style">Md Mobarak Ali</h1>
 
         <div class="info-list">
             <div class="info-item">
@@ -177,16 +185,4 @@ DOCTYPE html>
 
         <div class="btn-box">
             <a href="https://www.facebook.com/mh.mobarok.hossain.akul" target="_blank" class="btn btn-fb">Facebook</a>
-            <a href="https://wa.me/8801334475903" target="_blank" class="btn btn-wa">WhatsApp</a>
-        </div>
-
-        <div class="signature-section">
-            <div class="signature">MobaRok Ali</div>
-        </div>
-
-        <hr style="border: 0.1px solid #333; margin-top: 10px;">
-        <p style="color: #666; font-size: 10px; margin-top: 5px;">© ২০২৬ | বাংলাদেশ জিন্দাবাদ</p>
-    </div>
-
-</body>
-</html>
+            <a href="
