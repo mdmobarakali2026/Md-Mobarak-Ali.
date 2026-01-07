@@ -11,23 +11,28 @@
 
     <style>
         body { background: #0a0e14; color: #fff; font-family: sans-serif; text-align: center; margin: 0; padding: 10px; }
-        .container { max-width: 450px; margin: auto; background: #111; padding: 20px; border-radius: 15px; border: 2px solid #333; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .container { max-width: 450px; margin: auto; background: #111; padding: 20px; border-radius: 15px; border: 2px solid #333; }
         input { width: 85%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #444; background: #222; color: #fff; font-size: 16px; }
-        button { width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; font-size: 16px; }
+        button { width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
         .btn-primary { background: #ffcc00; color: #000; }
-        .btn-deposit { background: #25D366; color: #fff; }
+        .btn-primary:active { transform: scale(0.95); }
+        .error { color: #ff4d4d; font-size: 13px; margin-top: 5px; }
         
-        /* Roulette Wheel */
-        .wheel-container { position: relative; width: 300px; height: 300px; margin: 30px auto; }
-        .wheel-box { width: 100%; height: 100%; border-radius: 50%; border: 8px solid #fff; position: relative; overflow: hidden; transition: transform 5s cubic-bezier(0.1, 0, 0.1, 1); transform: rotate(0deg); background: #222; }
-        .slice { position: absolute; width: 100%; height: 100%; clip-path: polygon(50% 50%, 100% 20%, 100% 80%); display: flex; align-items: center; justify-content: flex-end; padding-right: 25px; box-sizing: border-box; font-weight: bold; font-size: 12px; color: #000; }
+        /* Game Section UI */
+        #gameBox { display: none; }
+        .balance-card { background: #222; padding: 15px; border-radius: 10px; border: 1px solid #444; margin: 15px 0; }
+        
+        /* Wheel Design */
+        .wheel-container { position: relative; width: 280px; height: 280px; margin: 20px auto; }
+        .wheel-box { width: 100%; height: 100%; border-radius: 50%; border: 6px solid #fff; position: relative; overflow: hidden; transition: 5s cubic-bezier(0.1, 0, 0.1, 1); transform: rotate(0deg); }
+        .slice { position: absolute; width: 100%; height: 100%; clip-path: polygon(50% 50%, 100% 20%, 100% 80%); display: flex; align-items: center; justify-content: flex-end; padding-right: 20px; box-sizing: border-box; font-weight: bold; font-size: 11px; color: #000; }
         .s1 { background: #ff4d4d; transform: rotate(0deg); }
         .s2 { background: #ffcc00; transform: rotate(-60deg); }
         .s3 { background: #39ff14; transform: rotate(-120deg); }
         .s4 { background: #00d2ff; transform: rotate(-180deg); }
         .s5 { background: #ff00ff; transform: rotate(-240deg); }
         .s6 { background: #ffffff; transform: rotate(-300deg); }
-        .pointer { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 35px solid #ff0000; z-index: 10; }
+        .pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 30px solid #ff0000; z-index: 10; }
     </style>
 </head>
 <body>
@@ -36,22 +41,17 @@
     <h2 style="color:#ffcc00">Good Luck Lottery 🎰</h2>
 
     <div id="authBox">
-        <p>মোবাইল নাম্বার দিয়ে লগইন করুন</p>
-        <input type="number" id="phone" placeholder="মোবাইল নাম্বার">
+        <p>মোবাইল নাম্বার দিয়ে লগইন/সাইন-আপ করুন</p>
+        <input type="number" id="phone" placeholder="মোবাইল নাম্বার (১১ ডিজিট)">
         <input type="password" id="password" placeholder="পাসওয়ার্ড (৬ ডিজিট)">
         <button class="btn-primary" onclick="handleAuth()">লগইন / সাইন-আপ</button>
-        <p id="authError" style="color:#ff4d4d; font-size:13px;"></p>
+        <p id="authError" class="error"></p>
     </div>
 
-    <div id="gameBox" style="display:none;">
-        <p>আইডি: <span id="displayId" style="color:#ffcc00"></span></p>
-        <p>ব্যালেন্স: <span id="userBalance" style="color:#39ff14; font-weight:bold;">০</span> টাকা</p>
-        
-        <div style="background:#222; padding:15px; border-radius:10px; border: 1px solid #444;">
-            <p style="font-size:13px; margin:0 0 10px 0;">বিকাশ (Personal): <b>01334475903</b></p>
-            <input type="number" id="depAmount" placeholder="টাকার পরিমাণ">
-            <input type="text" id="trxId" placeholder="Transaction ID (TrxID)">
-            <button class="btn-deposit" onclick="submitDeposit()">ডিপোজিট রিকোয়েস্ট</button>
+    <div id="gameBox">
+        <p>আইডি: <span id="userId" style="color:#ffcc00"></span></p>
+        <div class="balance-card">
+            <p style="margin:0;">ব্যালেন্স: <span id="userBalance" style="color:#39ff14; font-weight:bold; font-size:20px;">০</span> টাকা</p>
         </div>
 
         <div class="wheel-container">
@@ -59,102 +59,11 @@
             <div class="wheel-box" id="wheel">
                 <div class="slice s1">আইফোন ১৬</div>
                 <div class="slice s2">৫০,০০০৳</div>
-                <div class="slice s3">বাইক</div>
+                <div class="slice s3">পালসার বাইক</div>
                 <div class="slice s4">ল্যাপটপ</div>
                 <div class="slice s5">২৩,৩৪৫৳</div>
-                <div class="slice s6">স্মার্ট টিভি</div>
+                <div class="slice s6">টিভি</div>
             </div>
         </div>
-        
-        <button class="btn-primary" id="spinBtn" onclick="playGame()">স্পিন করুন (৫০ টাকা)</button>
-        <p id="status" style="font-weight:bold; color:#ffcc00; height: 20px;"></p>
-    </div>
-</div>
 
-<script>
-    // আপনার স্ক্রিনশট থেকে নেওয়া কনফিগ
-    const firebaseConfig = {
-        apiKey: "AIzaSyD75_camGwn_bF9Xh0rkDfK2ZE_vyyJ3DA",
-        authDomain: "good-luck-lottery.firebaseapp.com",
-        databaseURL: "https://good-luck-lottery-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "good-luck-lottery",
-        storageBucket: "good-luck-lottery.firebasestorage.app",
-        messagingSenderId: "842901691566",
-        appId: "1:842901691566:web:a1ea87568c2537767ce13f"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.database();
-
-    // Auth Logic
-    function handleAuth() {
-        const phone = document.getElementById('phone').value;
-        const pass = document.getElementById('password').value;
-        const err = document.getElementById('authError');
-        if(phone.length < 11 || pass.length < 6) {
-            err.innerText = "সঠিক নাম্বার ও অন্তত ৬ ডিজিটের পাসওয়ার্ড দিন।";
-            return;
-        }
-        const email = phone + "@lottery.com";
-        err.innerText = "লোডিং...";
-
-        auth.signInWithEmailAndPassword(email, pass).catch(() => {
-            auth.createUserWithEmailAndPassword(email, pass).then(u => {
-                db.ref('users/' + u.user.uid).set({ phone: phone, balance: 0 });
-            }).catch(e => { err.innerText = "সমস্যা হচ্ছে, আবার চেষ্টা করুন।"; });
-        });
-    }
-
-    auth.onAuthStateChanged(user => {
-        if (user) {
-            document.getElementById('authBox').style.display = 'none';
-            document.getElementById('gameBox').style.display = 'block';
-            document.getElementById('displayId').innerText = user.email.split('@')[0];
-            db.ref('users/' + user.uid + '/balance').on('value', snap => {
-                document.getElementById('userBalance').innerText = snap.val() || 0;
-            });
-        }
-    });
-
-    // Deposit Logic
-    function submitDeposit() {
-        const amt = document.getElementById('depAmount').value;
-        const trx = document.getElementById('trxId').value;
-        if(!amt || !trx) return alert("সব তথ্য দিন");
-        const msg = `ডিপোজিট রিকোয়েস্ট:\nআইডি: ${document.getElementById('displayId').innerText}\nটাকা: ${amt}\nTrxID: ${trx}`;
-        window.open(`https://wa.me/8801334475903?text=${encodeURIComponent(msg)}`);
-    }
-
-    // Game Logic
-    let rotation = 0;
-    const prizes = ["আইফোন ১৬", "৫০,০০০৳", "বাইক", "ল্যাপটপ", "২৩,৩৪৫৳", "স্মার্ট টিভি"];
-
-    function playGame() {
-        const spinBtn = document.getElementById('spinBtn');
-        const balRef = db.ref('users/' + auth.currentUser.uid + '/balance');
-        
-        balRef.once('value').then(snap => {
-            let bal = snap.val() || 0;
-            if(bal < 50) return alert("ব্যালেন্স নেই, ডিপোজিট করুন।");
-
-            spinBtn.disabled = true;
-            balRef.set(bal - 50);
-            
-            const extraDeg = Math.floor(Math.random() * 360);
-            rotation += 1800 + extraDeg;
-            document.getElementById('wheel').style.transform = `rotate(${rotation}deg)`;
-            document.getElementById('status').innerText = "চাকা ঘুরছে...";
-
-            setTimeout(() => {
-                spinBtn.disabled = false;
-                const actualDeg = rotation % 360;
-                const index = Math.floor(actualDeg / 60);
-                document.getElementById('status').innerText = "অভিনন্দন! আপনি জিতেছেন: " + prizes[index];
-            }, 5000);
-        });
-    }
-</script>
-
-</body>
-</html>
+        <button class="btn-primary" id="spinBtn" onclick="playGame()">স্পিন করুন (৫০৳)</button>
